@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Contact' : 'Add New Contact' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="contactForm">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" placeholder="Enter first name">
+      <mat-error *ngIf="contactForm.get('firstName')?.invalid">
+        {{ getErrorMessage('firstName') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" placeholder="Enter last name">
+      <mat-error *ngIf="contactForm.get('lastName')?.invalid">
+        {{ getErrorMessage('lastName') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Enter email address" type="email">
+      <mat-error *ngIf="contactForm.get('email')?.invalid">
+        {{ getErrorMessage('email') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Phone Number</mat-label>
+      <input matInput formControlName="phoneNumber" placeholder="Enter phone number">
+      <mat-hint>Format: +1234567890 or 123-456-7890</mat-hint>
+      <mat-error *ngIf="contactForm.get('phoneNumber')?.invalid">
+        {{ getErrorMessage('phoneNumber') }}
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()">
+    {{ isEditMode ? 'Update' : 'Create' }}
+  </button>
+</mat-dialog-actions>
